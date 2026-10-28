@@ -2,6 +2,34 @@
 
 这是一个作品集项目：在一份**模拟的**地区—月份面板上，评估“部分地区开始发放运营补贴之后，单位用户收益有没有变化，以及这个变化能否写成策略效应”。结果用于展示识别、估计和报告，不是企业真实成效。
 
+## Application Screenshots
+
+These images are captured from the running Streamlit app at seed 42, with 30 placebo replications. They are not mockups.
+
+### Overview
+
+![Overview](screenshots/overview.png)
+
+The overview labels the panel as simulated data. With seed 42, the baseline difference-in-differences estimate is 2.879, and the 95% cluster confidence interval is [1.840, 3.917].
+
+### Event study
+
+![Event study](screenshots/event-study.png)
+
+The event-study page plots the estimated relative-time coefficients and their 95% cluster confidence intervals. The omitted reference period is marked separately and is not an estimate of zero. The pre-period joint test is F(11, 47) = 1.216, p = 0.3033. An insignificant pre-period test does not prove parallel trends, and the page applies only to common adoption timing.
+
+### Robustness
+
+![Robustness](screenshots/robustness.png)
+
+The robustness page reports the covariate specification, shorter windows, a placebo adoption date, and the distribution of reassigned treatment labels. The placebo-time estimate is about zero and uses only months before the real adoption date. The placebo-assignment tail share describes where the actual estimate sits in that simulated distribution; it is not an identification p-value.
+
+### Decision report
+
+![Decision report](screenshots/decision-report.png)
+
+The generated report separates what the sample shows, what the model estimates, what depends on identifying assumptions, and what remains unknown. The recommendation uses the estimate, interval, alternative specifications, and unknown costs. It does not turn a p-value into a decision to expand the subsidy.
+
 ## 背景
 
 模拟情景是一个运营平台。某些地区从同一个月份开始实施补贴，其余地区始终不实施。业务上要分开回答五件事：
@@ -49,6 +77,7 @@ src/robustness.py           协变量、窗口、安慰剂时间和虚假处理�
 src/heterogeneity.py        分类型估计和组间差异
 src/plotting.py             图形，只读取已有结果
 src/reporting.py            Markdown 报告
+screenshots/                运行中的应用页面截图
 tests/                      pytest
 ```
 
